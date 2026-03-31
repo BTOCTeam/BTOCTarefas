@@ -3345,7 +3345,7 @@ document.getElementById('rpObsOverlay').addEventListener('click', e => { if (e.t
     const to = EMAILS[creatorName];
     if (!to) return;
     const assigneeStr = Array.isArray(assignees) ? assignees.join(', ') : (assignees || '');
-    const subject = 'Tarefa Concluída — ' + client;
+    const subject = 'Tarefa Concluída — ' + task + ' - ' + client;
     const dateStr = new Date().toLocaleDateString('pt-PT',{day:'2-digit',month:'long',year:'numeric'});
     const html = `<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Tarefa Conclu&#237;da</title>
 <style>@media screen and (max-width:600px){.mp{padding-left:20px!important;padding-right:20px!important}.mlp{padding-left:20px!important;padding-right:20px!important;padding-top:20px!important;padding-bottom:20px!important}}</style></head>
@@ -3379,7 +3379,7 @@ ${notes ? `<tr><td style="padding:20px 24px;border-top:1px solid #e2e4ea;" class
   async function sendEmail(name, task, client, deadline, notes) {
     const to = EMAILS[name];
     if (!to) return;
-    const subject = 'Nova Tarefa Atribuída — ' + client;
+    const subject = 'Nova Tarefa Atribuída — ' + task + ' - ' + client;
     const html = `<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Nova Tarefa Atribu&#237;da</title>
 <style>@media screen and (max-width:600px){.mp{padding-left:20px!important;padding-right:20px!important}.mlp{padding-left:20px!important;padding-right:20px!important;padding-top:20px!important;padding-bottom:20px!important}}</style></head>
 <body style="margin:0;padding:0;background-color:#f4f5f7;">
