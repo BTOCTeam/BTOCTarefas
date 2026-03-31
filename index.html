@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTOC TEAM</title>
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Kzc3Nzc3Kzc3Nzc3LTcrNzc1NzU3Nzc3Ky01NS0tLjU1NS0rLf/AABEIABwAHAMBIgACEQEDEQH/xAAZAAADAAMAAAAAAAAAAAAAAAAEBQYAAgf/xAAqEAACAgECBAMJAAAAAAAAAAABAgMEBQARBhJBYSEiMRMUJEJRcYGRsf/EABcBAAMBAAAAAAAAAAAAAAAAAAMEBQL/xAAdEQACAQQDAAAAAAAAAAAAAAABAgADEiExESJB/9oADAMBAAIRAxEAPwCdd2kdnkYs7HdmJ3JOtdPOC8NDnc9FTsuywKjSyBfAsBt4D9jVLS4ewnFQBw9O5jvYS8szSL5WT8/N26ddUjUC7lirVVTwZz7RFe9brIUr2pokJ35Ucgb6f8Rvw5Ek1GhjLsFmBiqzyPtzEevMp6amNFU3DUATd5CMfes425FbpSmOeI7qw/h7adZPjXNZBYlM61xG4k+HXk5mHU/XSXIQLWv2IIySkcjKpPrsDofQwqnJEadVbJEfZbi7KZama1r3fZgA8iQgO/3OkOs1S8N4CplKDT2HmDiUr5GMG2w7d9b6oIq3CCf/2Q==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-brand">
+    <img src="data:image/png;base64,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" alt="BTOC" style="height:38px;width:auto;object-fit:contain;">
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-page="tarefas">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+      Tarefas
+    </button>
+    <button class="nav-tab" data-page="controlo">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Controlo Fiscal
+    </button>
+    <button class="nav-tab" data-page="report">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Report
+    </button>
+  </div>
+  <div class="nav-right">
+    <span class="sync-dot" id="syncDot"></span>
+    <span class="toggle-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+    <button class="dark-toggle" id="darkToggle" title="Alternar modo escuro"></button>
+  </div>
+</nav>
+<!-- TAREFAS PAGE -->
+<div class="page active" id="page-tarefas">
+<div class="tarefas-wrap">
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Total</div><div class="stat-value" id="stat-total">—</div></div>
+  <div class="stat"><div class="stat-label">Pendentes</div><div class="stat-value" style="color:#d97706" id="stat-pending">—</div></div>
+  <div class="stat"><div class="stat-label">Concluídas</div><div class="stat-value" style="color:var(--green)" id="stat-done">—</div></div>
+  <div class="stat"><div class="stat-label">Em Atraso</div><div class="stat-value" style="color:var(--red)" id="stat-overdue">—</div></div>
+</div>
+<div class="tabs">
+  <button class="tab active" id="tab-active" data-tab="active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>Ativas <span class="tab-badge" id="badge-active">0</span></button>
+  <button class="tab" id="tab-archive" data-tab="archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>Arquivo <span class="tab-badge" id="badge-archive">0</span></button>
+</div>
+<div class="toolbar">
+  <div class="search-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="Pesquisar por cliente, tarefa ou notas...">
+  </div>
+  <select class="filter-select" id="filterAssignee">
+    <option value="">👤 Todos os responsáveis</option>
+    <option value="Tiago Fachada">Tiago Fachada</option>
+    <option value="Tiago Pereira">Tiago Pereira</option>
+    <option value="Miguel Leitão">Miguel Leitão</option>
+    <option value="Vânia Costa">Vânia Costa</option>
+  </select>
+  <select class="filter-select" id="filterStatus">
+    <option value="all">📋 Todos os status</option>
+    <option value="">Pendente</option>
+    <option value="Em Curso">Em Curso</option>
+    <option value="Feito">Feito</option>
+  </select>
+  <button class="btn btn-primary" id="btnNovaTarefa">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Nova Tarefa
+  </button>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Cliente</th><th>Tarefa</th><th>Responsável</th><th>Data Conclusão</th><th>Status</th><th style="text-align:center">Ações</th></tr></thead>
+    <tbody id="tableBody"><tr><td colspan="6" style="text-align:center;padding:3rem;color:var(--muted)">A carregar tarefas...</td></tr></tbody>
+  </table>
+</div>
+</div>
+</div>
+
+<!-- CONTROLO FISCAL PAGE -->
+<div class="page" id="page-controlo">
+<div class="cf-wrap">
+  <div style="max-width:1600px;margin:0 auto 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Ano</span>
+    <select id="cfYearSelect" onchange="cfSetYear(+this.value)" style="font-size:13px;font-weight:700;padding:5px 12px;border-radius:8px;border:2px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;outline:none;">
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+    </select>
+    <span id="cfYearStatus" style="font-size:11px;color:var(--muted);margin-left:4px;"></span>
+    <div id="cfMonthSelWrap" style="display:flex;align-items:center;gap:8px;margin-left:8px;">
+      <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Mês</span>
+      <select id="cfStatMonth" onchange="cfRenderStats()" style="font-size:13px;font-weight:700;padding:5px 12px;border-radius:8px;border:2px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;outline:none;">
+        <option value="">Ano todo</option>
+        <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+        <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+        <option value="6">Julho</option><option value="7">Agosto</option><option value="8">Setembro</option>
+        <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+      </select>
+    </div>
+    <div id="cfPPCSelWrap" style="display:none;align-items:center;gap:8px;margin-left:8px;">
+      <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Data</span>
+      <select id="cfStatPPC" onchange="cfRenderStats()" style="font-size:13px;font-weight:700;padding:5px 12px;border-radius:8px;border:2px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;outline:none;">
+        <option value="">Todas as datas</option>
+        <option value="0">Jul (31/07)</option>
+        <option value="1">Set (30/09)</option>
+        <option value="2">Dez (15/12)</option>
+      </select>
+    </div>
+  </div>
+  <div class="cf-stats" id="cfStats">
+  </div>
+  <div class="cf-sections" id="cfSections"></div>
+  <div class="cf-section-info" id="cfSectionInfo"></div>
+  <div class="cf-controls">
+    <input type="text" id="cfSearch" placeholder="🔍  Pesquisar cliente..." oninput="cfRender()">
+    <select id="cfTipoFilter" onchange="cfRender()"><option value="">Todas as tipologias</option></select>
+    <select id="cfMesFilter" onchange="cfRender()">
+      <option value="">Mês</option>
+      <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+      <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+      <option value="6">Julho</option><option value="7">Agosto</option><option value="8">Setembro</option>
+      <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+    </select>
+    <button class="cf-btn cf-btn-add" onclick="cfOpenAdd()">+ Adicionar</button>
+    <button class="cf-btn" onclick="cfExportCSV()">↓ CSV</button>
+  </div>
+  <div class="cf-table-wrap"><table class="cf-table" id="cfTable"><thead></thead><tbody></tbody></table></div>
+</div>
+</div>
+
+<!-- REPORT PAGE -->
+<div class="page" id="page-report">
+<div class="cf-wrap">
+  <div style="max-width:1600px;margin:0 auto 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <span style="font-size:18px;font-weight:800;color:var(--text);">Contabilidade / Report Enviados</span>
+    <span id="rpStatus" style="font-size:11px;color:var(--muted);margin-left:8px;"></span>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+      <input type="text" id="rpSearch" placeholder="🔍 Pesquisar cliente..." oninput="rpRender()" style="padding:7px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:13px;outline:none;width:220px;">
+      <div style="position:relative;" id="rpMesWrap">
+        <button onclick="rpToggleMesDD()" id="rpMesBtn" style="padding:7px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;min-width:160px;justify-content:space-between;">
+          <span id="rpMesBtnLabel">Todos os meses</span><span>&#9660;</span>
+        </button>
+        <div id="rpMesDD" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:1000;min-width:180px;padding:6px 0;max-height:320px;overflow-y:auto;">
+          <label style="display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--border);">
+            <input type="checkbox" id="rpMesAll" checked onchange="rpMesAllToggle(this)"> Todos os meses
+          </label>
+          <div id="rpMesCbList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cf-table-wrap"><table class="cf-table" id="rpTable"><thead></thead><tbody></tbody></table></div>
+</div>
+  <div style="max-width:1600px;margin:32px auto 16px;border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+    <div style="background:#1a1a2e;color:#fff;text-align:center;padding:8px;font-size:12px;font-weight:700;letter-spacing:0.08em;">Legenda</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <tr><td style="background:#16a34a;color:#fff;font-weight:700;padding:7px 14px;width:220px;">VALIDADO</td><td style="padding:7px 14px;color:var(--text);background:var(--surface);">Já foi validado balancete</td></tr>
+      <tr><td style="background:#ca8a04;color:#fff;font-weight:700;padding:7px 14px;">LANÇADO, FALTA VALIDAR</td><td style="padding:7px 14px;color:var(--text);background:var(--surface2);">Lançamentos finalizados mas falta validação</td></tr>
+      <tr><td style="background:#f97316;color:#fff;font-weight:700;padding:7px 14px;">faltam documentos/inf por parte cliente</td><td style="padding:7px 14px;color:var(--text);background:var(--surface);">colocar em observações o ponto de situação</td></tr>
+      <tr><td style="background:#dc2626;color:#fff;font-weight:700;padding:7px 14px;">FALTA FAZER FECHO</td><td style="padding:7px 14px;color:var(--text);background:var(--surface2);">falta do nosso lado fazer os lançamentos</td></tr>
+      <tr><td style="background:#7c3aed;color:#fff;font-weight:700;padding:7px 14px;">ENVIADO REPORT</td><td style="padding:7px 14px;color:var(--text);background:var(--surface);">Enviado email para o cliente</td></tr>
+      <tr><td style="background:#2563eb;color:#fff;font-weight:700;padding:7px 14px;">EM CURSO</td><td style="padding:7px 14px;color:var(--text);background:var(--surface2);">o que falta fazer</td></tr>
+    </table>
+  </div>
+  <!-- Report Modals -->
+  <div id="rpAtribOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:380px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <h3 style="margin:0 0 4px;font-size:16px;font-weight:700;color:var(--text)">Atribuição de Tarefa</h3>
+      <p style="margin:0 0 20px;font-size:12px;color:var(--muted)" id="rpAtribClient"></p>
+      <div style="margin-bottom:14px;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Responsável</label>
+        <select id="rpAtribPessoa" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;outline:none;cursor:pointer;">
+          <option value="">— Nenhum —</option><option value="Tiago Fachada">Tiago Fachada</option><option value="Tiago Pereira">Tiago Pereira</option><option value="Miguel Leitão">Miguel Leitão</option><option value="Vânia Costa">Vânia Costa</option>
+        </select></div>
+      <div style="margin-bottom:14px;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Criado por</label>
+        <select id="rpAtribCriadoPor" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;outline:none;cursor:pointer;">
+          <option value="">— Nenhum —</option><option value="Tiago Fachada">Tiago Fachada</option><option value="Tiago Pereira">Tiago Pereira</option><option value="Miguel Leitão">Miguel Leitão</option><option value="Vânia Costa">Vânia Costa</option>
+        </select></div>
+      <div style="margin-bottom:20px;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Mês</label>
+        <select id="rpAtribMes" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;outline:none;cursor:pointer;">
+          <option value="">— Nenhum —</option><option value="Janeiro">Janeiro</option><option value="Fevereiro">Fevereiro</option><option value="Março">Março</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option><option value="Agosto">Agosto</option><option value="Setembro">Setembro</option><option value="Outubro">Outubro</option><option value="Novembro">Novembro</option><option value="Dezembro">Dezembro</option>
+        </select></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button onclick="rpCloseAtrib()" style="padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;">Cancelar</button>
+        <button onclick="rpSaveAtrib()" style="padding:8px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">💾 Guardar</button>
+      </div>
+    </div>
+  </div>
+  <div id="rpCellOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:400px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <h3 style="margin:0 0 4px;font-size:16px;font-weight:700;color:var(--text)" id="rpCellTitle">Estado</h3>
+      <p style="margin:0 0 20px;font-size:12px;color:var(--muted)" id="rpCellSubtitle"></p>
+      <div style="margin-bottom:14px;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:8px;">Estado</label>
+        <div id="rpCellOptions" style="display:flex;flex-direction:column;gap:6px;">
+          <div class="rp-cell-opt" data-val="" style="padding:8px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-size:12px;color:var(--muted);">— Limpar</div>
+          <div class="rp-cell-opt" data-val="VALIDADO" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#d1fae5;color:#065f46;font-weight:700;font-size:12px;">VALIDADO</div>
+          <div class="rp-cell-opt" data-val="LANÇADO, FALTA VALIDAR" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#fef9c3;color:#854d0e;font-weight:700;font-size:12px;">LANÇADO, FALTA VALIDAR</div>
+          <div class="rp-cell-opt" data-val="faltam documentos/inf por parte cliente" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#ffedd5;color:#c2410c;font-weight:700;font-size:12px;">faltam documentos/inf por parte cliente</div>
+          <div class="rp-cell-opt" data-val="FALTA FAZER FECHO" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#fee2e2;color:#b91c1c;font-weight:700;font-size:12px;">FALTA FAZER FECHO</div>
+          <div class="rp-cell-opt" data-val="ENVIADO REPORT" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#ede9fe;color:#6d28d9;font-weight:700;font-size:12px;">ENVIADO REPORT</div>
+          <div class="rp-cell-opt" data-val="EM CURSO" style="padding:8px 14px;border-radius:8px;cursor:pointer;background:#dbeafe;color:#1d4ed8;font-weight:700;font-size:12px;">EM CURSO</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:14px;">
+        <div style="flex:1;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Responsável</label>
+          <select id="rpCellPessoa" style="width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;outline:none;cursor:pointer;">
+            <option value="">— Nenhum —</option><option>Tiago Fachada</option><option>Tiago Pereira</option><option>Miguel Leitão</option><option>Vânia Costa</option>
+          </select></div>
+        <div style="flex:1;"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Criado por</label>
+          <select id="rpCellCriadoPor" style="width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;outline:none;cursor:pointer;">
+            <option value="">— Nenhum —</option><option>Tiago Fachada</option><option>Tiago Pereira</option><option>Miguel Leitão</option><option>Vânia Costa</option>
+          </select></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button onclick="rpCloseCellModal()" style="padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;">Cancelar</button>
+        <button onclick="rpSaveCellModal()" style="padding:8px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">💾 Guardar</button>
+      </div>
+    </div>
+  </div>
+  <div id="rpObsOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border-radius:16px;padding:28px;width:420px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <h3 style="margin:0 0 6px;font-size:16px;font-weight:700;color:var(--text)" id="rpObsTitle">Observações</h3>
+      <p style="margin:0 0 14px;font-size:12px;color:var(--muted)" id="rpObsClient"></p>
+      <textarea id="rpObsText" rows="5" placeholder="Escreve as tuas observações..." style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;resize:vertical;outline:none;line-height:1.5;"></textarea>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
+        <button onclick="rpCloseObs()" style="padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;">Cancelar</button>
+        <button onclick="rpSaveObs()" style="padding:8px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">💾 Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAREFAS MODALS -->
+<div id="status-portal">
+  <div class="status-option" data-status=""><span class="dot dot-pending"></span>Pendente</div>
+  <div class="status-option" data-status="Em Curso"><span class="dot dot-progress"></span>Em Curso</div>
+  <div class="status-option" data-status="Feito"><span class="dot dot-done"></span>Feito</div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header"><h2 id="modalTitle">Nova Tarefa</h2><button class="icon-btn" id="btnCloseModal" style="border:none;background:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label>Cliente *</label>
+        <select id="f-client">
+          <option value="">— Selecionar cliente —</option>
+          <option>0400 - N1</option><option>0402 - BA</option><option>0403 - AFTERHOUSE</option><option>0405 - TOPCHALLENGE</option><option>1332 - TOPAMBITION</option><option>1331 - More Taste</option><option>0982 - MIND</option><option>2298 - SOCIEDADE AGRICOLA DE FRUJAIS</option><option>0943 - Petrin</option><option>0920 - BIOSURFIT</option><option>2397 - Encosta Alta</option><option>1708 - Alfastandard</option><option>1363 - Outdoit</option><option>0881 - PY</option><option>0880 - OGER</option><option>0882 - IMOSLEN</option><option>0879 - MELHOR ESTRATÉGIA</option><option>1854 - FOREST BAY</option><option>1457 - Sky Valet Portugal</option><option>1614 - Famataíde</option><option>1681 - Verão D'Improviso</option><option>1531 - AFS</option><option>2375 - SUBFUNDO 2</option><option>2385 - SUBFUNDO 1</option><option>2330 - AI MEDICAL</option><option>2250 - ASK Marginal</option><option>1315 - Ask, SA</option><option>1317 - Ask Patrimónios</option><option>1318 - Ask IV - Mediação de Seguros</option><option>1316 - ISQ - Sociedade de Capital de Risco</option><option>2320 - Scalepharm</option><option>2191 - Lab Análises Clinicas Dra Giselia P Cunha</option><option>2335 - PACE</option><option>2340 - Hipnose</option><option>Execujet</option>
+        </select></div>
+      <div class="field"><label>Tarefa *</label><textarea id="f-task" rows="2" placeholder="Descrição da tarefa"></textarea></div>
+      <div class="field">
+        <label>Responsável pela Tarefa</label>
+        <div class="assignee-dropdown" id="assigneeDropdown">
+          <button type="button" class="assignee-trigger" id="assigneeTrigger"><span class="trigger-label" id="assigneeLabel">— Sem responsável —</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="assignee-menu" id="assigneeMenu">
+            <label class="assignee-option" id="opt-tf"><input type="checkbox" name="assignee" value="Tiago Fachada"> Tiago Fachada</label>
+            <label class="assignee-option" id="opt-tp"><input type="checkbox" name="assignee" value="Tiago Pereira"> Tiago Pereira</label>
+            <label class="assignee-option" id="opt-ml"><input type="checkbox" name="assignee" value="Miguel Leitão"> Miguel Leitão</label>
+            <label class="assignee-option" id="opt-vc"><input type="checkbox" name="assignee" value="Vânia Costa"> Vânia Costa</label>
+          </div>
+        </div>
+      </div>
+      <div class="field"><label>Data de Conclusão</label><input type="date" id="f-deadline"></div>
+      <div class="field"><label>Criado por</label><select id="f-creator"><option value="">-- Selecionar --</option><option>Tiago Fachada</option><option>Tiago Pereira</option><option>Miguel Leitão</option><option>Vânia Costa</option></select></div>
+      <div class="field"><label>Notas Adicionais</label><textarea id="f-notes" rows="3" placeholder="Notas, observações..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="btnCancelar">Cancelar</button>
+      <button class="btn btn-primary" id="btnGuardar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Adicionar Tarefa</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="notesOverlay">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header"><h2 id="noteModalTitle">Notas</h2><button class="icon-btn" id="btnCloseNotes" style="border:none;background:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-body"><div class="field"><label>Notas Adicionais</label><textarea id="notesText" rows="6" placeholder="Escreve aqui as notas..."></textarea></div></div>
+    <div class="modal-footer"><button class="btn btn-ghost" id="btnCancelarNotas">Cancelar</button><button class="btn btn-primary" id="btnGuardarNotas"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Guardar Notas</button></div>
+  </div>
+</div>
+<div class="overlay" id="confirmOverlay">
+  <div class="modal confirm-modal">
+    <div class="confirm-body">
+      <div class="confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></div>
+      <h3>Eliminar tarefa?</h3><p>Esta ação é permanente e não pode ser desfeita.</p>
+      <div class="task-preview"><strong id="confirmClient">—</strong><span id="confirmTask">—</span></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" id="btnCancelarConfirm">Cancelar</button><button class="btn btn-danger" id="btnConfirmarEliminar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>Eliminar</button></div>
+  </div>
+</div>
+<!-- CF Modal -->
+<div class="cf-modal-overlay" id="cfModalOverlay">
+  <div class="cf-modal">
+    <h3 id="cfModalTitle">Adicionar obrigação</h3>
+    <input type="hidden" id="cfEditIdx" value="-1">
+    <label>Cliente *</label><input id="cfCliente" type="text" placeholder="Nome do cliente">
+    <label>Grupo</label><input id="cfGrupo" type="text" placeholder="Ex: ESTORIL, ASK, PY...">
+    <label>Tipologia / Observações</label><input id="cfTipo" type="text" placeholder="Ex: Mensal, Trimestral, BTOC...">
+    <label style="margin-bottom:8px">Estado por mês</label>
+    <div class="month-grid" id="cfMonthGrid"></div>
+    <div class="modal-btns">
+      <button class="cf-btn cf-btn-add" onclick="cfSaveEntry()">💾 Guardar</button>
+      <button class="cf-btn" onclick="cfCloseModal()">Cancelar</button>
+      <button class="cf-btn" id="cfDeleteBtn" style="color:var(--red);border-color:var(--red);display:none" onclick="cfDeleteEntry()">Eliminar</button>
+    </div>
+  </div>
+</div>
+<div id="rpSyncOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10001;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border-radius:16px;padding:28px;width:380px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h3 style="margin:0 0 4px;font-size:16px;font-weight:700;color:var(--text)">Atualizar Report</h3>
+    <p style="margin:0 0 18px;font-size:12px;color:var(--muted)" id="rpSyncSubtitle"></p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      <div class="rp-sync-opt" data-val="VALIDADO" style="padding:10px 16px;border-radius:8px;cursor:pointer;background:#d1fae5;color:#065f46;font-weight:700;font-size:13px;">VALIDADO</div>
+      <div class="rp-sync-opt" data-val="LANÇADO, FALTA VALIDAR" style="padding:10px 16px;border-radius:8px;cursor:pointer;background:#fef9c3;color:#854d0e;font-weight:700;font-size:13px;">LANÇADO, FALTA VALIDAR</div>
+      <div class="rp-sync-opt" data-val="faltam documentos/inf por parte cliente" style="padding:10px 16px;border-radius:8px;cursor:pointer;background:#ffedd5;color:#c2410c;font-weight:700;font-size:13px;">faltam documentos/inf por parte cliente</div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button onclick="rpSyncClose()" style="padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;">Não alterar</button>
+      <button onclick="rpSyncSave()" style="padding:8px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="data/cf-data-2026.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controlo.js"></script>
+<script src="js/report.js"></script>
+<script type="module" src="js/firebase.js"></script>
+</body>
+</html>
