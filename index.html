@@ -3345,38 +3345,67 @@ document.getElementById('rpObsOverlay').addEventListener('click', e => { if (e.t
     const to = EMAILS[creatorName];
     if (!to) return;
     const assigneeStr = Array.isArray(assignees) ? assignees.join(', ') : (assignees || '');
-    const subject = `✅ Tarefa concluída — ${client}`;
-    const html = `
-      <div style="font-family:sans-serif;max-width:500px;margin:0 auto;">
-        <h2 style="color:#18181b;">✅ Tarefa Concluída</h2>
-        <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Cliente</td><td style="padding:8px;font-weight:600;">${client}</td></tr>
-          <tr style="background:#f4f4f5;"><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Tarefa</td><td style="padding:8px;">${task}</td></tr>
-          <tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Concluída por</td><td style="padding:8px;">${assigneeStr}</td></tr>
-          <tr style="background:#f4f4f5;"><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Data</td><td style="padding:8px;">${new Date().toLocaleDateString('pt-PT',{day:'2-digit',month:'long',year:'numeric'})}</td></tr>
-          ${notes ? `<tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Notas</td><td style="padding:8px;">${notes}</td></tr>` : ''}
-        </table>
-        <p style="margin-top:16px;font-size:12px;color:#71717a;">BTOC TEAM — Gestão de Tarefas</p>
-      </div>`;
+    const subject = 'Tarefa conclu&#237;da &#10003; &#8212; ' + client;
+    const dateStr = new Date().toLocaleDateString('pt-PT',{day:'2-digit',month:'long',year:'numeric'});
+    const html = `<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Tarefa Conclu&#237;da</title>
+<style>@media screen and (max-width:600px){.mp{padding-left:20px!important;padding-right:20px!important}.mlp{padding-left:20px!important;padding-right:20px!important;padding-top:20px!important;padding-bottom:20px!important}}</style></head>
+<body style="margin:0;padding:0;background-color:#f4f5f7;">
+<div style="display:none;font-size:1px;color:#f4f5f7;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">A tarefa foi marcada como conclu&#237;da. Consulta os detalhes no interior.</div>
+<table style="background:#f4f5f7;padding:40px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center">
+<table style="width:100%;max-width:100%;box-shadow:0 8px 24px rgba(0,0,0,0.04);border-radius:16px;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center"><table style="background:#ffffff;border-radius:16px 16px 0 0;padding:32px 40px 24px 40px;border-top:1px solid #e2e4ea;border-left:1px solid #e2e4ea;border-right:1px solid #e2e4ea;" class="mlp" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr>
+<td align="left" valign="middle" style="padding-top:20px;"><img src="https://raw.githubusercontent.com/BTOCTeam/BTOCTarefas/main/logo.png" alt="BTOC Tarefas" width="160" style="display:block;max-width:160px;height:auto;border:0;"></td>
+<td align="right" valign="middle"><div style="background:rgba(109,74,255,0.1);border-radius:12px;padding:10px 14px;display:inline-block;"><p style="margin:0;font-size:11px;color:#6d4aff;text-transform:uppercase;letter-spacing:0.08em;font-weight:bold;">Tarefa Conclu&#237;da &#10004;&#65039;</p></div></td>
+</tr></tbody></table></td></tr>
+<tr><td style="background:#ffffff;padding:12px 40px 36px 40px;border-left:1px solid #e2e4ea;border-right:1px solid #e2e4ea;" class="mp">
+<p style="margin:0 0 8px;font-size:15px;color:#8a8aaa;">Ol&#225;,</p>
+<h2 style="margin:0 0 6px;font-size:24px;font-weight:bold;color:#1a1a2e;">${creatorName} &#128075;</h2>
+<p style="margin:0 0 28px;font-size:15px;color:#555570;line-height:1.6;">A tarefa atribu&#237;da por si foi marcada como conclu&#237;da. Consulta os detalhes abaixo.</p>
+<div style="height:1px;background:#e2e4ea;margin-bottom:28px;">&nbsp;</div>
+<table style="background:#f8f7ff;border:1px solid #e2e4ea;border-radius:12px;overflow:hidden;margin-bottom:28px;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Cliente</p><p style="margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;">${client}</p></td></tr>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Tarefa</p><p style="margin:0;font-size:15px;color:#555570;line-height:1.5;">${task}</p></td></tr>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Conclu&#237;da por</p><p style="margin:0;font-size:15px;font-weight:bold;color:#6d4aff;">${assigneeStr}</p></td></tr>
+<tr><td style="padding:20px 24px;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Data</p><p style="margin:0;font-size:15px;font-weight:bold;color:#6d4aff;">&#128197; ${dateStr}</p></td></tr>
+${notes ? `<tr><td style="padding:20px 24px;border-top:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Notas</p><p style="margin:0;font-size:15px;color:#555570;line-height:1.5;">${notes}</p></td></tr>` : ''}
+</tbody></table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><a style="display:inline-block;background:linear-gradient(135deg,#3b1fa8,#6d4aff);color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:bold;letter-spacing:0.01em;" href="https://btocteam.github.io/BTOCTarefas/">Ver Tarefas &#8594;</a></td></tr></tbody></table>
+</td></tr>
+<tr><td style="background:#f0f1f5;border:1px solid #e2e4ea;border-top:none;border-radius:0 0 16px 16px;padding:20px 40px;" class="mp" align="center"><p style="margin:0;font-size:12px;color:#8a8aaa;">Este &#233; um email gerado automaticamente pelo sistema de Gest&#227;o de Tarefas BTOC</p></td></tr>
+</tbody></table></td></tr></tbody></table></body></html>`;
     await sendEmailGAS(to, subject, html);
   }
 
   async function sendEmail(name, task, client, deadline, notes) {
     const to = EMAILS[name];
     if (!to) return;
-    const subject = `📋 Nova tarefa atribuída — ${client}`;
-    const html = `
-      <div style="font-family:sans-serif;max-width:500px;margin:0 auto;">
-        <h2 style="color:#18181b;">📋 Nova Tarefa Atribuída</h2>
-        <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Cliente</td><td style="padding:8px;font-weight:600;">${client}</td></tr>
-          <tr style="background:#f4f4f5;"><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Tarefa</td><td style="padding:8px;">${task}</td></tr>
-          <tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Responsável</td><td style="padding:8px;">${name}</td></tr>
-          <tr style="background:#f4f4f5;"><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Prazo</td><td style="padding:8px;">${deadline || 'Sem data'}</td></tr>
-          ${notes ? `<tr><td style="padding:8px;color:#71717a;font-size:12px;text-transform:uppercase;">Notas</td><td style="padding:8px;">${notes}</td></tr>` : ''}
-        </table>
-        <p style="margin-top:16px;font-size:12px;color:#71717a;">BTOC TEAM — Gestão de Tarefas</p>
-      </div>`;
+    const subject = 'Nova Tarefa Atribu&#237;da &#8212; ' + client;
+    const html = `<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Nova Tarefa Atribu&#237;da</title>
+<style>@media screen and (max-width:600px){.mp{padding-left:20px!important;padding-right:20px!important}.mlp{padding-left:20px!important;padding-right:20px!important;padding-top:20px!important;padding-bottom:20px!important}}</style></head>
+<body style="margin:0;padding:0;background-color:#f4f5f7;">
+<div style="display:none;font-size:1px;color:#f4f5f7;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">Foi-te atribu&#237;da a tarefa: ${task}. Verifica o prazo e os detalhes no interior.</div>
+<table style="background:#f4f5f7;padding:40px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center">
+<table style="width:100%;max-width:100%;box-shadow:0 8px 24px rgba(0,0,0,0.04);border-radius:16px;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody>
+<tr><td align="center"><table style="background:#ffffff;border-radius:16px 16px 0 0;padding:32px 40px 24px 40px;border-top:1px solid #e2e4ea;border-left:1px solid #e2e4ea;border-right:1px solid #e2e4ea;" class="mlp" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr>
+<td align="left" valign="middle" style="padding-top:20px;"><img src="https://raw.githubusercontent.com/BTOCTeam/BTOCTarefas/main/logo.png" alt="BTOC Tarefas" width="160" style="display:block;max-width:160px;height:auto;border:0;"></td>
+<td align="right" valign="middle"><div style="background:rgba(109,74,255,0.1);border-radius:12px;padding:10px 14px;display:inline-block;"><p style="margin:0;font-size:11px;color:#6d4aff;text-transform:uppercase;letter-spacing:0.08em;font-weight:bold;">Nova Tarefa</p></div></td>
+</tr></tbody></table></td></tr>
+<tr><td style="background:#ffffff;padding:12px 40px 36px 40px;border-left:1px solid #e2e4ea;border-right:1px solid #e2e4ea;" class="mp">
+<p style="margin:0 0 8px;font-size:15px;color:#8a8aaa;">Ol&#225;,</p>
+<h2 style="margin:0 0 6px;font-size:24px;font-weight:bold;color:#1a1a2e;">${name} &#128075;</h2>
+<p style="margin:0 0 28px;font-size:15px;color:#555570;line-height:1.6;">Foi-te atribu&#237;da uma nova tarefa. Consulta os detalhes abaixo.</p>
+<div style="height:1px;background:#e2e4ea;margin-bottom:28px;">&nbsp;</div>
+<table style="background:#f8f7ff;border:1px solid #e2e4ea;border-radius:12px;overflow:hidden;margin-bottom:28px;" border="0" width="100%" cellspacing="0" cellpadding="0"><tbody>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Cliente</p><p style="margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;">${client}</p></td></tr>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Tarefa</p><p style="margin:0;font-size:15px;color:#555570;line-height:1.5;">${task}</p></td></tr>
+<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Respons&#225;vel</p><p style="margin:0;font-size:15px;color:#555570;line-height:1.5;">${name}</p></td></tr>
+<tr><td style="padding:20px 24px;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Data de Conclus&#227;o</p><p style="margin:0;font-size:15px;font-weight:bold;color:#6d4aff;">&#128197; ${deadline || 'Sem data'}</p></td></tr>
+${notes ? `<tr><td style="padding:20px 24px;border-top:1px solid #e2e4ea;" class="mp"><p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#8a8aaa;font-weight:bold;">Notas</p><p style="margin:0;font-size:15px;color:#555570;line-height:1.5;">${notes}</p></td></tr>` : ''}
+</tbody></table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><a style="display:inline-block;background:linear-gradient(135deg,#3b1fa8,#6d4aff);color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:bold;letter-spacing:0.01em;" href="https://btocteam.github.io/BTOCTarefas/">Ver Tarefas &#8594;</a></td></tr></tbody></table>
+</td></tr>
+<tr><td style="background:#f0f1f5;border:1px solid #e2e4ea;border-top:none;border-radius:0 0 16px 16px;padding:20px 40px;" class="mp" align="center"><p style="margin:0;font-size:12px;color:#8a8aaa;">Este &#233; um email gerado automaticamente pelo sistema de Gest&#227;o de Tarefas BTOC</p></td></tr>
+</tbody></table></td></tr></tbody></table></body></html>`;
     await sendEmailGAS(to, subject, html);
   }
 
