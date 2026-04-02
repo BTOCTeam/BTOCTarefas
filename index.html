@@ -3138,7 +3138,7 @@ document.getElementById('rpObsOverlay').addEventListener('click', e => { if (e.t
     document.getElementById('badge-archive').textContent = archiveTasks.length;
     const today = new Date(); today.setHours(0,0,0,0);
     const overdue = activeTasks.filter(t => t.deadline && new Date(t.deadline+'T00:00:00') < today).length;
-    document.getElementById('stat-total').textContent   = allTasks.length;
+    document.getElementById('stat-total').textContent   = activeTasks.length;
     document.getElementById('stat-overdue').textContent = overdue;
     document.getElementById('filterAssignee').classList.toggle('active', !!fA);
     document.getElementById('filterStatus').classList.toggle('active', fSActive);
