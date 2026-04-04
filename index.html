@@ -3061,12 +3061,32 @@ async function cfLoadYear2025() {
 let cfSaveTimer = null;
 function cfScheduleSave() {
   clearTimeout(cfSaveTimer);
+  // Guarda imediatamente no localStorage como backup
+  try { localStorage.setItem('btoc-cf-data-2026', JSON.stringify(cfData)); } catch(e) {}
+  // Guarda no Firebase após 3 segundos
   cfSaveTimer = setTimeout(() => cfSaveYearToFirebase(cfActiveYear), 3000);
 }
+
+// Guarda imediatamente ao sair/atualizar a página
+window.addEventListener('beforeunload', () => {
+  clearTimeout(cfSaveTimer);
+  try { localStorage.setItem('btoc-cf-data-2026', JSON.stringify(cfData)); } catch(e) {}
+  cfSaveYearToFirebase(cfActiveYear);
+});
 
 document.getElementById('page-controlo').classList.add('year-2026');
 
 async function cfLoadYear2026() {
+  // Aplica localStorage imediatamente enquanto Firebase carrega
+  try {
+    const local = localStorage.getItem('btoc-cf-data-2026');
+    if (local) {
+      const localData = JSON.parse(local);
+      Object.keys(localData).forEach(section => {
+        if (cfData2026[section]) cfData2026[section] = localData[section];
+      });
+    }
+  } catch(e) {}
   cfInitSections(); cfPopulateFilters(); cfRender();
   document.getElementById('cfStatMonth').value = String((new Date().getMonth() + 11) % 12);
   cfRenderStats();
@@ -3079,11 +3099,15 @@ async function cfLoadYear2026() {
       Object.keys(loaded).forEach(section => {
         if (cfData2026[section]) cfData2026[section] = loaded[section];
       });
+      // Sincroniza localStorage com o Firebase
+      try { localStorage.setItem('btoc-cf-data-2026', JSON.stringify(cfData2026)); } catch(e) {}
       cfRender(); cfRenderStats();
     } else {
       await cfSaveYearToFirebase(2026);
     }
-  } catch(e) { console.warn('2026 Firebase load failed, using local:', e); }
+  } catch(e) {
+    console.warn('2026 Firebase load failed, using localStorage:', e);
+  }
 }
 cfLoadYear2026();
 
