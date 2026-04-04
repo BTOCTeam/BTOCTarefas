@@ -3061,10 +3061,8 @@ async function cfLoadYear2025() {
 let cfSaveTimer = null;
 function cfScheduleSave() {
   clearTimeout(cfSaveTimer);
-  // Guarda imediatamente no localStorage como backup
   try { localStorage.setItem('btoc-cf-data-2026', JSON.stringify(cfData)); } catch(e) {}
-  // Guarda no Firebase após 3 segundos
-  cfSaveTimer = setTimeout(() => cfSaveYearToFirebase(cfActiveYear), 3000);
+  cfSaveYearToFirebase(cfActiveYear);
 }
 
 // Guarda imediatamente ao sair/atualizar a página
