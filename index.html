@@ -2386,7 +2386,8 @@ function cfRowHasPendingEmail(row, miList) {
 
 function cfCellClass(row, mi) {
   const cur = ((row.m || [])[mi] || '').toLowerCase().trim();
-  if (cfIsAskSaftRow(cfActiveSection, row) && !cfAskMonthSent(mi)) return 'cell-edit cell-email-pending';
+  // No SAFT Vendas, as células dos meses nunca ficam roxas (só cliente/grupo/tipologia)
+  if (cfActiveSection === 'SAFT Vendas') return 'cell-edit';
   if (cfHasEmailRule(cfActiveSection, row, mi) && cur !== 'email enviado') return 'cell-edit cell-email-pending';
   return 'cell-edit';
 }
@@ -2628,7 +2629,7 @@ function cfRender() {
       }
       return cells;
     })()}
-    <td class="${cfRowHasPendingEmail(r, miList) ? 'cf-client-email-pending' : ''}"><button class="cf-btn cf-btn-sm" onclick="cfEditEntry(${r._idx})">✎</button></td>
+    <td><button class="cf-btn cf-btn-sm" onclick="cfEditEntry(${r._idx})">✎</button></td>
   </tr>`).join('');
 }
 
