@@ -1585,6 +1585,22 @@ tbody tr.row-tipologia-gray:hover td {
     <label>Tipologia / Observações</label><input id="cfTipo" type="text" placeholder="Ex: Mensal, Trimestral, BTOC...">
     <label style="margin-bottom:8px">Estado por mês</label>
     <div class="month-grid" id="cfMonthGrid"></div>
+    <div id="cfEmailSection" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--cf-border,var(--border))">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:10px">
+        <input type="checkbox" id="cfEmailAtivo" style="width:16px;height:16px;cursor:pointer">
+        <span>✉ Email automático para este cliente</span>
+      </label>
+      <div id="cfEmailFields" style="display:none">
+        <label>Para</label><input id="cfEmailTo" type="text" placeholder="destinatario@exemplo.com">
+        <label>CC (opcional, separar por vírgula)</label><input id="cfEmailCc" type="text" placeholder="copia1@exemplo.com, copia2@exemplo.com">
+        <label>Assunto</label><input id="cfEmailSubject" type="text" placeholder="Ex: Cliente | SAFT - {Mes} {ANO}">
+        <label>Corpo do email</label>
+        <textarea id="cfEmailBody" rows="5" placeholder="Ex: Bom dia,&#10;&#10;Peço o envio do SAFT referente a {mes}.&#10;A data limite é {PRAZO}.&#10;Obrigado."></textarea>
+        <p style="font-size:11px;color:var(--cf-muted,var(--muted));margin-top:6px;line-height:1.5">
+          <code>{mes}</code> = mês em minúsculas · <code>{Mes}</code> = mês com maiúscula · <code>{ANO}</code> = ano selecionado · <code>{PRAZO}</code> = dia 5 do mês seguinte (dd/mm/aaaa)
+        </p>
+      </div>
+    </div>
     <div class="modal-btns">
       <button class="cf-btn cf-btn-add" onclick="cfSaveEntry()">💾 Guardar</button>
       <button class="cf-btn" onclick="cfCloseModal()">Cancelar</button>
@@ -2277,113 +2293,77 @@ function cfGmailLink(to, cc, subject, body) {
   return `https://mail.google.com/mail/?${params.toString()}`;
 }
 
+function cfSubstituirPlaceholders(texto, mi, ano) {
+  if (!texto) return texto;
+  const mesFull = (typeof CF_MESES_FULL !== 'undefined' && CF_MESES_FULL[mi]) ? CF_MESES_FULL[mi] : '';
+  const dueDate = new Date(ano, mi + 1, 5);
+  const dd = String(dueDate.getDate()).padStart(2, '0');
+  const mm = String(dueDate.getMonth() + 1).padStart(2, '0');
+  const yyyy = dueDate.getFullYear();
+  return texto
+    .replace(/\{mes\}/g, mesFull.toLowerCase())
+    .replace(/\{Mes\}/g, mesFull)
+    .replace(/\{ANO\}/g, String(ano))
+    .replace(/\{PRAZO\}/g, `${dd}/${mm}/${yyyy}`);
+}
+
+const CF_LEGACY_EMAIL_RULES = [
+  {
+    match: 'MIND SOFTWARE',
+    to: 'Rui.Fernandes@mind.pt',
+    cc: 'tiago.abreu@mind.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
+    subject: 'Mind | SAFT - {Mes} {ANO}',
+    body: 'Bom dia Rui,\n\nSolicito, por favor, o envio do SAFT da Mind referente a {mes}.\nInformo que a data limite para a submissão é {PRAZO}.\nObrigado.'
+  },
+  {
+    match: 'PRIME YIELD',
+    to: 'cfo@prime-yield.com',
+    cc: 'tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
+    subject: 'PRIME YIELD | SAFT - {Mes} {ANO}',
+    body: 'Bom dia Sofia,\n\nPeço, por favor, que nos envies os SAFT\'s referentes a {mes}.\nInformo que a data limite para a submissão é {PRAZO}.\nObrigado.'
+  },
+  {
+    match: 'PETRIN',
+    to: 'sandra@petrin.pt',
+    cc: 'encomendas@petrin.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
+    subject: 'PETRIN | SAFT - {Mes} {ANO}',
+    body: 'Bom dia Sandra,\n\nSolicito, por favor, o envio dos SAFT\'s da Petrin referente a {mes}.\nInformo que a data limite para a submissão é {PRAZO}.\nObrigado.'
+  },
+  {
+    match: 'ASSOC DE FUTEBOL DE SETÚBAL',
+    to: 'secretaria@afsetubal.pt',
+    cc: 'tesouraria@afsetubal.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
+    subject: 'AFS | SAFT - {Mes} {ANO}',
+    body: 'Bom dia,\n\nPodemos aceder para retirar o SAFT de faturação do mês de {mes}?\nObrigado.'
+  }
+];
+
+function cfFindLegacyEmailRule(clientName) {
+  const up = (clientName || '').toUpperCase();
+  return CF_LEGACY_EMAIL_RULES.find(rule => up.includes(rule.match)) || null;
+}
+
 function cfGetTestEmailPayload(section, row, mi) {
-  const client = (row.g || row.c || '').trim();
-  const mes = (typeof CF_MESES_FULL !== 'undefined' && CF_MESES_FULL[mi]) ? CF_MESES_FULL[mi] : '';
+  if (section !== 'SAFT Vendas' || mi < 0 || mi > 11) return null;
   const yearSel = document.getElementById('cfYearSelect');
   const ano = parseInt(yearSel ? yearSel.value : new Date().getFullYear(), 10);
 
-  if (section === 'SAFT Vendas' && row.c && row.c.toUpperCase().includes('MIND SOFTWARE') && mi >= 0 && mi <= 11) {
-    const subject = `Mind | SAFT - ${mes} ${ano}`;
-    const dueDate = new Date(ano, mi + 1, 5);
-    const dd = String(dueDate.getDate()).padStart(2, '0');
-    const mm = String(dueDate.getMonth() + 1).padStart(2, '0');
-    const yyyy = dueDate.getFullYear();
-    const body = [
-      'Bom dia Rui,',
-      '',
-      `Solicito, por favor, o envio do SAFT da Mind referente a ${mes}.`,
-      `Informo que a data limite para a submissão é ${dd}/${mm}/${yyyy}.`,
-      'Obrigado.'
-    ].join('\n');
+  if (row.email && row.email.ativo && row.email.to) {
     return {
-      to: 'Rui.Fernandes@mind.pt',
-      cc: 'tiago.abreu@mind.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
-      subject,
-      body
+      to: cfSubstituirPlaceholders(row.email.to, mi, ano),
+      cc: cfSubstituirPlaceholders(row.email.cc || '', mi, ano),
+      subject: cfSubstituirPlaceholders(row.email.subject || '', mi, ano),
+      body: cfSubstituirPlaceholders(row.email.body || '', mi, ano)
     };
   }
 
-
-  if (section === 'SAFT Vendas' && row.c && row.c.toUpperCase().includes('PRIME YIELD') && mi >= 0 && mi <= 11) {
-    const subject = `PRIME YIELD | SAFT - ${mes} ${ano}`;
-    const dueDate = new Date(ano, mi + 1, 5);
-    const dd = String(dueDate.getDate()).padStart(2, '0');
-    const mm = String(dueDate.getMonth() + 1).padStart(2, '0');
-    const yyyy = dueDate.getFullYear();
-    const body = [
-      'Bom dia Sofia,',
-      '',
-      `Peço, por favor, que nos envies os SAFT's referentes a ${mes}.`,
-      `Informo que a data limite para a submissão é ${dd}/${mm}/${yyyy}.`,
-      'Obrigado.'
-    ].join('\n');
+  const legacy = cfFindLegacyEmailRule(row.c);
+  if (legacy) {
     return {
-      to: 'cfo@prime-yield.com',
-      cc: 'tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
-      subject,
-      body
-    };
-  }
-
-
-  if (section === 'SAFT Vendas' && row.c && row.c.toUpperCase().includes('PETRIN') && mi >= 0 && mi <= 11) {
-    const subject = `PETRIN | SAFT - ${mes} ${ano}`;
-    const dueDate = new Date(ano, mi + 1, 5);
-    const dd = String(dueDate.getDate()).padStart(2, '0');
-    const mm = String(dueDate.getMonth() + 1).padStart(2, '0');
-    const yyyy = dueDate.getFullYear();
-    const body = [
-      'Bom dia Sandra,',
-      '',
-      `Solicito, por favor, o envio dos SAFT's da Petrin referente a ${mes}.`,
-      `Informo que a data limite para a submissão é ${dd}/${mm}/${yyyy}.`,
-      'Obrigado.'
-    ].join('\n');
-    return {
-      to: 'sandra@petrin.pt',
-      cc: 'encomendas@petrin.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
-      subject,
-      body
-    };
-  }
-
-
-  if (section === 'SAFT Vendas' && row.c && row.c.toUpperCase().includes('ASSOC DE FUTEBOL DE SETÚBAL') && mi >= 0 && mi <= 11) {
-    const subject = `AFS | SAFT - ${mes} ${ano}`;
-    const body = [
-      'Bom dia,',
-      '',
-      `Podemos aceder para retirar o SAFT de faturação do mês de ${mes}?`,
-      'Obrigado.'
-    ].join('\n');
-    return {
-      to: 'secretaria@afsetubal.pt',
-      cc: 'tesouraria@afsetubal.pt,tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
-      subject,
-      body
-    };
-  }
-
-
-  if (false && section === 'SAFT Vendas' && row.c && row.c.toUpperCase().includes('ASK') && mi >= 0 && mi <= 11) {
-    const subject = `ASK | SAFT - ${mes} ${ano}`;
-    const dueDate = new Date(ano, mi + 1, 5);
-    const dd = String(dueDate.getDate()).padStart(2, '0');
-    const mm = String(dueDate.getMonth() + 1).padStart(2, '0');
-    const yyyy = dueDate.getFullYear();
-    const body = [
-      'Bom dia Tiago,',
-      '',
-      `Peço, por favor, que nos avise assim que seja possível extrair os SAFT's referentes a ${mes}.`,
-      `Informo que a data limite para a submissão é ${dd}/${mm}/${yyyy}.`,
-      'Obrigado.'
-    ].join('\n');
-    return {
-      to: 'tpereira@ask.pt',
-      cc: 'tiago.fachada@btocnet.com,tiago.pereira@btocnet.com,vania.costa@btocnet.com',
-      subject,
-      body
+      to: cfSubstituirPlaceholders(legacy.to, mi, ano),
+      cc: cfSubstituirPlaceholders(legacy.cc || '', mi, ano),
+      subject: cfSubstituirPlaceholders(legacy.subject, mi, ano),
+      body: cfSubstituirPlaceholders(legacy.body, mi, ano)
     };
   }
 
@@ -2497,6 +2477,14 @@ function cfOpenAdd() {
   document.getElementById('cfTipo').value = '';
   document.getElementById('cfDeleteBtn').style.display = 'none';
   cfBuildMonthGrid({m: Array(12).fill('')});
+  const isSaft = cfActiveSection === 'SAFT Vendas';
+  document.getElementById('cfEmailSection').style.display = isSaft ? 'block' : 'none';
+  document.getElementById('cfEmailAtivo').checked = false;
+  document.getElementById('cfEmailFields').style.display = 'none';
+  document.getElementById('cfEmailTo').value = '';
+  document.getElementById('cfEmailCc').value = '';
+  document.getElementById('cfEmailSubject').value = '';
+  document.getElementById('cfEmailBody').value = '';
   document.getElementById('cfModalOverlay').classList.add('open');
 }
 
@@ -2509,8 +2497,21 @@ function cfEditEntry(idx) {
   document.getElementById('cfTipo').value = r.t;
   document.getElementById('cfDeleteBtn').style.display = 'inline-block';
   cfBuildMonthGrid(r);
+  const isSaft = cfActiveSection === 'SAFT Vendas';
+  document.getElementById('cfEmailSection').style.display = isSaft ? 'block' : 'none';
+  const em = r.email || cfFindLegacyEmailRule(r.c) || {};
+  document.getElementById('cfEmailAtivo').checked = !!(r.email ? em.ativo : (isSaft && em.to));
+  document.getElementById('cfEmailFields').style.display = document.getElementById('cfEmailAtivo').checked ? 'block' : 'none';
+  document.getElementById('cfEmailTo').value = em.to || '';
+  document.getElementById('cfEmailCc').value = em.cc || '';
+  document.getElementById('cfEmailSubject').value = em.subject || '';
+  document.getElementById('cfEmailBody').value = em.body || '';
   document.getElementById('cfModalOverlay').classList.add('open');
 }
+
+document.getElementById('cfEmailAtivo').addEventListener('change', function() {
+  document.getElementById('cfEmailFields').style.display = this.checked ? 'block' : 'none';
+});
 
 function cfSaveEntry() {
   const idx = +document.getElementById('cfEditIdx').value;
@@ -2521,6 +2522,21 @@ function cfSaveEntry() {
     m: CF_MESES.map((_, i) => document.getElementById('cfmf'+i).value)
   };
   if (!entry.c) { alert('O nome do cliente é obrigatório.'); return; }
+  if (cfActiveSection === 'SAFT Vendas') {
+    const ativo = document.getElementById('cfEmailAtivo').checked;
+    const to = document.getElementById('cfEmailTo').value.trim();
+    if (ativo && to) {
+      entry.email = {
+        ativo: true,
+        to,
+        cc: document.getElementById('cfEmailCc').value.trim(),
+        subject: document.getElementById('cfEmailSubject').value.trim(),
+        body: document.getElementById('cfEmailBody').value
+      };
+    }
+  } else if (idx !== -1 && cfData[cfActiveSection][idx] && cfData[cfActiveSection][idx].email) {
+    entry.email = cfData[cfActiveSection][idx].email;
+  }
   if (idx === -1) cfData[cfActiveSection].push(entry);
   else cfData[cfActiveSection][idx] = entry;
   cfCloseModal(); cfPopulateFilters(); cfRender(); cfScheduleSave();
@@ -2531,7 +2547,7 @@ function cfDeleteEntry() {
   if (idx < 0) return;
   if (confirm('Eliminar esta linha?')) {
     cfData[cfActiveSection].splice(idx, 1);
-    cfCloseModal(); cfPopulateFilters(); cfRender();
+    cfCloseModal(); cfPopulateFilters(); cfRender(); cfScheduleSave();
   }
 }
 
