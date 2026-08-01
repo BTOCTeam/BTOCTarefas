@@ -2344,7 +2344,8 @@ function cfFindLegacyEmailRule(clientName) {
 }
 
 function cfGetTestEmailPayload(section, row, mi) {
-  if (section !== 'SAFT Vendas' || mi < 0 || mi > 11) return null;
+  const isEmailSection = section === 'SAFT Vendas' || section === 'Retenções / DMIS';
+  if (!isEmailSection || mi < 0 || mi > 11) return null;
   const yearSel = document.getElementById('cfYearSelect');
   const ano = parseInt(yearSel ? yearSel.value : new Date().getFullYear(), 10);
 
@@ -2357,14 +2358,16 @@ function cfGetTestEmailPayload(section, row, mi) {
     };
   }
 
-  const legacy = cfFindLegacyEmailRule(row.c);
-  if (legacy) {
-    return {
-      to: cfSubstituirPlaceholders(legacy.to, mi, ano),
-      cc: cfSubstituirPlaceholders(legacy.cc || '', mi, ano),
-      subject: cfSubstituirPlaceholders(legacy.subject, mi, ano),
-      body: cfSubstituirPlaceholders(legacy.body, mi, ano)
-    };
+  if (section === 'SAFT Vendas') {
+    const legacy = cfFindLegacyEmailRule(row.c);
+    if (legacy) {
+      return {
+        to: cfSubstituirPlaceholders(legacy.to, mi, ano),
+        cc: cfSubstituirPlaceholders(legacy.cc || '', mi, ano),
+        subject: cfSubstituirPlaceholders(legacy.subject, mi, ano),
+        body: cfSubstituirPlaceholders(legacy.body, mi, ano)
+      };
+    }
   }
 
   return null;
@@ -2477,8 +2480,8 @@ function cfOpenAdd() {
   document.getElementById('cfTipo').value = '';
   document.getElementById('cfDeleteBtn').style.display = 'none';
   cfBuildMonthGrid({m: Array(12).fill('')});
-  const isSaft = cfActiveSection === 'SAFT Vendas';
-  document.getElementById('cfEmailSection').style.display = isSaft ? 'block' : 'none';
+  const isEmailSection = cfActiveSection === 'SAFT Vendas' || cfActiveSection === 'Retenções / DMIS';
+  document.getElementById('cfEmailSection').style.display = isEmailSection ? 'block' : 'none';
   document.getElementById('cfEmailAtivo').checked = false;
   document.getElementById('cfEmailFields').style.display = 'none';
   document.getElementById('cfEmailTo').value = '';
@@ -2497,9 +2500,10 @@ function cfEditEntry(idx) {
   document.getElementById('cfTipo').value = r.t;
   document.getElementById('cfDeleteBtn').style.display = 'inline-block';
   cfBuildMonthGrid(r);
+  const isEmailSection = cfActiveSection === 'SAFT Vendas' || cfActiveSection === 'Retenções / DMIS';
   const isSaft = cfActiveSection === 'SAFT Vendas';
-  document.getElementById('cfEmailSection').style.display = isSaft ? 'block' : 'none';
-  const em = r.email || cfFindLegacyEmailRule(r.c) || {};
+  document.getElementById('cfEmailSection').style.display = isEmailSection ? 'block' : 'none';
+  const em = r.email || (isSaft ? cfFindLegacyEmailRule(r.c) : null) || {};
   document.getElementById('cfEmailAtivo').checked = !!(r.email ? em.ativo : (isSaft && em.to));
   document.getElementById('cfEmailFields').style.display = document.getElementById('cfEmailAtivo').checked ? 'block' : 'none';
   document.getElementById('cfEmailTo').value = em.to || '';
@@ -2522,7 +2526,7 @@ function cfSaveEntry() {
     m: CF_MESES.map((_, i) => document.getElementById('cfmf'+i).value)
   };
   if (!entry.c) { alert('O nome do cliente é obrigatório.'); return; }
-  if (cfActiveSection === 'SAFT Vendas') {
+  if (cfActiveSection === 'SAFT Vendas' || cfActiveSection === 'Retenções / DMIS') {
     const ativo = document.getElementById('cfEmailAtivo').checked;
     const to = document.getElementById('cfEmailTo').value.trim();
     if (ativo && to) {
